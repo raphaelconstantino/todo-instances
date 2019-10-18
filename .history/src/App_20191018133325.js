@@ -7,7 +7,7 @@ import './App.css'
 
 function Todo({ todo, index, changeTodoState, deleteTodo }) {
   return (
-    <div style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }} className="todo">
+    <div className="todo">
       <FormControlLabel control={
         <Checkbox
           checked={todo.isCompleted}
@@ -61,9 +61,9 @@ function App() {
     setTodos(newTodos)
   }
 
-  const changeTodoState = index => {
+  const completeTodo = index => {
     const newTodos = [...todos];
-    newTodos[index].isCompleted = !newTodos[index].isCompleted;
+    newTodos[index].isCompleted = true;
     setTodos(newTodos);
   }
 
@@ -79,7 +79,7 @@ function App() {
         <div className="todo-list">
           {
             todos.map((todo, index) => (
-              <Todo key={index} index={index} todo={todo} changeTodoState={changeTodoState} deleteTodo={deleteTodo} />
+              <Todo key={index} index={index} todo={todo} completeTodo={completeTodo} deleteTodo={deleteTodo} />
             ))
           }
           <TodoForm addTodo={addTodo} />

@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import './App.css'
 
-function Todo({ todo, index, changeTodoState, deleteTodo }) {
+function Todo({ todo, index, completeTodo, deleteTodo }) {
   return (
     <div style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }} className="todo">
-      <FormControlLabel control={
-        <Checkbox
-          checked={todo.isCompleted}
-          value={todo.text}
-          onChange={() => changeTodoState(index)}
-        />}
-        label={todo.text}
-      />
+      {todo.text}
       <div>
+        <button onClick={() => completeTodo(index)}>Complete</button>
         <button onClick={() => deleteTodo(index)}>x</button>
       </div>
     </div>
@@ -61,9 +54,9 @@ function App() {
     setTodos(newTodos)
   }
 
-  const changeTodoState = index => {
+  const completeTodo = index => {
     const newTodos = [...todos];
-    newTodos[index].isCompleted = !newTodos[index].isCompleted;
+    newTodos[index].isCompleted = true;
     setTodos(newTodos);
   }
 
@@ -79,7 +72,7 @@ function App() {
         <div className="todo-list">
           {
             todos.map((todo, index) => (
-              <Todo key={index} index={index} todo={todo} changeTodoState={changeTodoState} deleteTodo={deleteTodo} />
+              <Todo key={index} index={index} todo={todo} completeTodo={completeTodo} deleteTodo={deleteTodo} />
             ))
           }
           <TodoForm addTodo={addTodo} />

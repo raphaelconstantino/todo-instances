@@ -7,7 +7,7 @@ import './App.css'
 
 function Todo({ todo, index, changeTodoState, deleteTodo }) {
   return (
-    <div style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }} className="todo">
+    <div className="todo">
       <FormControlLabel control={
         <Checkbox
           checked={todo.isCompleted}
